@@ -1,0 +1,3 @@
+﻿dotnet restore
+dotnet publish -c Release -o ./publish/workerservice
+sc.exe create 'Phone Billing Service' binpath= ./publish/service/PhoneBillingService.exe

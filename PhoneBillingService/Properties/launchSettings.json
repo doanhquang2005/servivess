@@ -1,0 +1,10 @@
+﻿{
+  "profiles": {
+    "PhoneBillingService": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}
