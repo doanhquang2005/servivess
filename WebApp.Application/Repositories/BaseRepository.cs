@@ -2,7 +2,6 @@
 using HT.Extentions.Enums;
 using HT.Repositories;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Threading.Tasks;
 
 namespace WebApp.Application.Repositories {

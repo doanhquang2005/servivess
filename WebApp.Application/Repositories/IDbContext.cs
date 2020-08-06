@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Infrastructure;
@@ -15,12 +16,12 @@ namespace WebApp.Application.Repositories {
     /// <summary>
     ///  Gets a System.Data.Entity.Infrastructure.DbEntityEntry<TEntity> object for the given entity providing access to information about the entity and the  ability to perform actions on the entity.
     /// </summary>
-    DbEntityEntry Entry(object entity);
+    EntityEntry Entry(object entity);
 
     /// <summary>
     ///  Gets a System.Data.Entity.Infrastructure.DbEntityEntry<TEntity> object for the given entity providing access to information about the entity and the  ability to perform actions on the entity.
     /// </summary>
-    DbEntityEntry<TEntity> Entry<TEntity>(TEntity entity) where TEntity : class;
+    EntityEntry<TEntity> Entry<TEntity>(TEntity entity) where TEntity : class;
 
     /// <summary>
     /// Asynchronously saves all changes made in this context to the underlying database.
