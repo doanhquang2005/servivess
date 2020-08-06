@@ -1,9 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
-using System.Collections.Generic;
-using System.Data.Entity.Infrastructure;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace WebApp.Application.Repositories {
