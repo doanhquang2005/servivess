@@ -1,0 +1,63 @@
+﻿@model PageResult<ED_Class>
+@{
+    ViewData["Title"] = "Page";
+    ViewBag.MenuPart = LayoutMenu.Home;
+    ViewBag.MenuItem = 2;
+    var menuLayout = LayoutMenu.Get(ViewBag.MenuPart);
+    var cookies = httpContextAccessor.HttpContext.Request.Cookies;
+    long yearId, groupClassId;
+    long.TryParse(cookies["YearId"], out yearId);
+    long.TryParse(cookies["GroupClassId"], out groupClassId);
+}
+<n-navs icon="@menuLayout.Icon" label-1="@menuLayout.Name" path-1="@menuLayout.Path" active="Danh sách lớp học">
+    <n-menu path="/class/create"><n-icon active="(int)Actives.Add"></n-icon></n-menu>
+    <n-menu path="#"><n-icon active="(int)Actives.Excel"></n-icon></n-menu>
+</n-navs>
+<n-form is-border="false" is-button-submit="false">
+    <div class="row">
+        <div class="col-sm-3">
+            <n-select id="YearId" label="Năm học" value="@yearId" type="@Types.ED_Year" class="@Razor.Class.Cookie" icon=""></n-select>
+        </div>
+        <div class="col-sm-3">
+            <n-select id="GroupClassId" label="Nhóm lớp" value="@groupClassId" type="@Types.ED_GroupClass" child-id1="GroupOldId" class="@Razor.Class.Cookie" icon=""></n-select>
+        </div>
+        <div class="col-sm-3">
+            <n-select id="GroupOldId" label="Nhóm tuổi" value="" type="@Types.ED_GroupOld" parent-id1="@groupClassId" is-require="false" icon=""></n-select>
+        </div>
+        <div class=" col-sm-3">
+            <n-input id="Keyword" label="Tìm kiếm toàn bộ" is-require="false" icon=""></n-input>
+        </div>
+    </div>
+</n-form>
+
+<partial name="_Page" />
+<div class="modal fade" id="modalCloseClass" tabindex="-1" role="dialog" aria-labelledby="labelCloseClass" aria-hidden="true">
+    <div class="modal-dialog cascading-modal" role="document">
+        <div class="modal-content modal-body">
+            <div class="text-right">
+                <button type="button" class="close text-muted" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="/class/close" method="post" id="@Razor.Id.FormModal" n-ajax="1">
+                <n-hide id="Id"></n-hide>
+                <n-input id="DateEnd" label="Ngày kết thúc" value="@DateTime.Now.ToString("dd/MM/yyyy")" class="@Razor.Class.DatePicker"></n-input>
+                <div class="pt-4 text-center">
+                    <button type="button" class="btn btn-outline-info" data-dismiss="modal">Hủy bỏ</button>
+                    <button type="submit" class="btn btn-success">Đồng ý</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script>
+        $.loadComponent("/class/page/");
+        $("#@Razor.Id.FormModal").validate(true, function () {
+            $("#close-" + $("#@Razor.Id.FormModal").find("#Id").val()).remove();
+        });
+        function showModal(id) {
+            $("#modalCloseClass").modal('show').find("#Id").val(id);
+        }
+    </script>
+}

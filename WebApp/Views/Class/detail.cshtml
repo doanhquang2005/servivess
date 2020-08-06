@@ -1,0 +1,31 @@
+﻿@model ED_Class
+@{
+    ViewData["Title"] = "Detail";
+    ViewBag.MenuPart = LayoutMenu.Home;
+    ViewBag.MenuItem = 2;
+    var menuLayout = LayoutMenu.Get(ViewBag.MenuPart);
+}
+<n-navs icon="@menuLayout.Icon" label-1="@menuLayout.Name" path-1="@menuLayout.Path"
+        label-2="Danh sách các lớp" path-2="/class/page" active="Lớp @Model.ClassName">
+    <n-menu path="/student/create"><n-icon active="(int)Actives.Add"></n-icon></n-menu>
+</n-navs>
+<div class="row">
+    <div class="col-sm-6">
+        <n-detail for="YearId" type="Types.ED_Year"></n-detail>
+        <n-detail for="GroupClassId" type="Types.ED_GroupClass"></n-detail>
+        <n-detail for="GroupOldId" type="Types.ED_GroupOld"></n-detail>
+        <n-detail for="SchoolId" type="Types.ED_School"></n-detail>
+        <n-detail for="ClassName"></n-detail>
+        <n-detail for="DateStart"></n-detail>
+        <n-detail for="DateEnd"></n-detail>
+        <n-detail for="Position"></n-detail>
+    </div>
+    <div class="col-sm-6">
+        <n-detail for="IsSuccess"></n-detail>
+        <n-detail for="HaftLiveId" type="@Types.CM_HalfLive"></n-detail>
+        <n-detail for="ProgramId" type="@Types.ED_Program"></n-detail>
+        <n-detail for="IsLanguage"></n-detail>
+        <n-detail for="IsFullTime"></n-detail>
+        <n-detail for="IsDisability"></n-detail>
+    </div>
+</div>

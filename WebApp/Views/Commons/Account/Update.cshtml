@@ -1,0 +1,23 @@
+﻿@model US_User
+@{
+    ViewData["Title"] = "Update";
+    ViewBag.MenuPart = LayoutMenu.Account;
+    ViewBag.MenuItem = 1;
+    var menuLayout = LayoutMenu.Get(ViewBag.MenuPart);
+}
+<n-navs icon="@menuLayout.Icon" label-1="@menuLayout.Name" path-1="@menuLayout.Path" active="Cập nhật hồ sơ"></n-navs>
+<n-form action="/account/update">
+    @Html.AntiForgeryToken()
+    <n-input for="FullName" icon="@Icons.Name"></n-input>
+    <n-input for="PhoneNumber" label="Số di động" min="10" max="10" icon="@Icons.NumberPhone" class="@Razor.Class.NumberPhone"></n-input>
+    <n-input for="Birthday" class="@Razor.Class.DatePicker"></n-input>
+    <n-file for="Avatar" is-auto="false"></n-file>
+    <n-switch for="IsMale" label-left="Nữ"></n-switch>
+</n-form>
+
+@section Scripts {
+    <script>
+        $("#fileAvatar").upImage(240, 240, true);
+        $.validate(true);
+    </script>
+}

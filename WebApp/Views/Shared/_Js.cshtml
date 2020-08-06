@@ -1,0 +1,40 @@
+﻿<!-- /Start your project here-->
+<!-- JQuery -->
+<script type="text/javascript" src="~/js/jquery-3.4.1.min.js"></script>
+<!-- Bootstrap tooltips -->
+<script type="text/javascript" src="~/js/popper.min.js"></script>
+<!-- Bootstrap core JavaScript -->
+<script type="text/javascript" src="~/js/bootstrap.min.js"></script>
+<!-- MDB core JavaScript -->
+<script type="text/javascript" src="~/js/mdb.min.js"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<environment include="Development">
+    <!-- SCRIPTS -->
+    <script src="~/js/modules/wow.js"></script>
+    <script src="~/rate/js/star-rating.js"></script>
+    <script src="~/js/addons/datatables.js" asp-append-version="true"></script>
+    <script src="~/js/cookie.js"></script>
+    <script src="~/js/form.js" asp-append-version="true"></script>
+    <script src="~/js/extent.js" asp-append-version="true"></script>
+    <script src="~/script.js" asp-append-version="true"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/lazysizes.js" async></script>
+    <script src="~/main.min.js" asp-append-version="true"></script>
+</environment>
+@if(ViewBag.IsEditor == true) {
+    <script src="~/editor/ckeditor.js"></script>
+}
+<script>
+        @if(TempData[Notify.notifyMessage] != null){
+            @: Notify.show(@(TempData[Notify.notifyStatus]??2), '@TempData[Notify.notifyMessage]');
+            if((int)(TempData[Notify.notifyStatus] ?? Notify.success) == Notify.success) {
+                @: toastr.success('@TempData[Notify.notifyMessage]');
+            } else if((int)TempData[Notify.notifyStatus] == Notify.warning) {
+                @: toastr.warning('@TempData[Notify.notifyMessage]');
+            } else if((int)TempData[Notify.notifyStatus] == Notify.danger) {
+                @: toastr.error('@TempData[Notify.notifyMessage]');
+            }
+        }
+        Notify.show(1599963920087, "<b>VNTT</b> kính chào các bạn!");
+</script>

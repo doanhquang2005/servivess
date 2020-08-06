@@ -1,0 +1,16 @@
+﻿@model BiDays
+@{
+    ViewData["Title"] = "Create";
+    ViewBag.MenuPart = LayoutMenu.Home;
+    ViewBag.MenuItem = 4;
+    var menuLayout = LayoutMenu.Get(ViewBag.MenuPart);
+}
+<n-navs icon="@menuLayout.Icon" label-1="@menuLayout.Name" path-1="@menuLayout.Path" active="Tạo mới"></n-navs>
+<n-form action="/day/create">
+    <partial name="_CreateEdit" />
+</n-form>
+@section Scripts{
+    <script>
+        $.validate(true);
+    </script>
+}

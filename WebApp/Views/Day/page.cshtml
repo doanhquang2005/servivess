@@ -1,0 +1,18 @@
+﻿@model PageResult<BiDays>
+@{
+    ViewData["Title"] = "Page";
+    ViewBag.MenuPart = LayoutMenu.Data;
+    ViewBag.MenuItem = 4;
+    var menuLayout = LayoutMenu.Get(ViewBag.MenuPart);
+}
+<n-navs icon="@menuLayout.Icon" label-1="@menuLayout.Name" path-1="@menuLayout.Path" active="Quản lý ngày lễ">
+    <n-menu path="/day/create"><n-icon active="(int)Actives.Add"></n-icon></n-menu>
+</n-navs>
+
+<partial name="_Page" />
+
+@section Scripts{
+    <script>
+        $.loadComponent("/day/page/");
+    </script>
+}

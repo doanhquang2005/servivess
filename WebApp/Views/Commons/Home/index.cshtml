@@ -1,0 +1,11 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+    ViewBag.MenuPart = LayoutMenu.Home;
+    ViewBag.MenuItem = 1;
+    var menuLayout = LayoutMenu.Get(ViewBag.MenuPart);
+}
+<n-navs icon="@menuLayout.Icon" label-1="@menuLayout.Name" path-1="@menuLayout.Path"></n-navs>
+
+<div class="text-center">
+    <h1 class="display-4 mt-5">Welcome to VNTT</h1>
+</div>

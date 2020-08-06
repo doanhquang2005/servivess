@@ -1,0 +1,18 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <partial name="_Head" />
+    @RenderSection("Styles", required: false)
+</head>
+<body class="fixed-sn mdb-skin">
+    <partial name="_Navigation" />
+    <main class="mb-4">
+        <div class="container-fluid">
+            @RenderBody()
+        </div>
+    </main>
+    <partial name="_Footer" />
+    <partial name="_Js" />
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

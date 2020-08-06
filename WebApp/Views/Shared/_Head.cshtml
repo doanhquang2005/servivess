@@ -1,0 +1,43 @@
+﻿<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+@if(ViewData["Type"] != null) {
+    <meta property="og:type" content="@ViewData["Type"]" />
+}
+<title>@ViewData["Title"]</title>
+<meta name="og:title" property="og:title" content="@ViewData["Title"]" />
+<meta name="twitter:card" content="@ViewData["Title"]">
+@if(ViewData["Description"] != null) {
+    <meta name="description" content="@ViewData["Description"]">
+    <meta property="og:description" content="@ViewData["Description"]" />
+}
+@if(ViewData["Canonical"] != null) {
+    <link rel="canonical" href="@ViewData["Canonical"]">
+    @*<meta property="og:url" content="@Helper.pathWebsite@ViewData["Canonical"]" />*@
+}
+@if(ViewData["Keywords"] != null) {
+    <meta name="keywords" content="@ViewData["Keywords"]">
+}
+@if(ViewData["Image"] != null) {
+    <meta property="og:image" content="@ViewData["Image"]" />
+}
+@if(ViewBag.NoIndex == true) {
+    <meta name="robots" content="noindex, nofollow">
+}
+<environment include="Development">
+    <!-- Font Awesome -->
+    <link href="~/fontawesome/css/all.css" rel="stylesheet" />
+    <!-- Bootstrap core CSS -->
+    <link href="~/css/bootstrap.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="~/css/mdb.css" rel="stylesheet">
+    <link href="~/rate/css/star-rating.css" rel="stylesheet" />
+    <link href="~/css/addons/datatables.css" rel="stylesheet" />
+    <!-- Your custom styles (optional) -->
+    <link href="~/css/style.css" rel="stylesheet" asp-append-version="true" />
+    <link href="~/style.css" rel="stylesheet" asp-append-version="true" />
+</environment>
+<environment exclude="Development">
+    <link rel="icon" href="/favicon.png">
+    <link href="~/main.min.css" asp-append-version="true" rel="stylesheet" />
+</environment>

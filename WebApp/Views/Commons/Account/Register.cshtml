@@ -1,0 +1,79 @@
+﻿@model RegisterViewModel
+@{
+    ViewData["Title"] = "Register";
+    Layout = "_LayoutLogin";
+}
+
+<div class="row no-gutter">
+    <!-- The image half -->
+    <div class="col-md-6 d-none d-md-flex bg-image"></div>
+
+    <!-- The content half -->
+    <div class="col-md-6 bg-light">
+        <div class="login d-flex align-items-center py-5">
+
+            <!-- Demo content-->
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-10 col-xl-7 mx-auto">
+                        <div class="d-none d-sm-block">
+                            <h3 class="display-4">@Helper.BrandName</h3>
+                            <p class="text-muted mb-4 text-right">@Helper.Slogan</p>
+                        </div>
+                        <n-form is-button-submit="false" action="/account/register?returnUrl=@ViewData["ReturnUrl"]">
+                            @Html.AntiForgeryToken()
+                            <n-input for="UserName" icon="@Icons.User"></n-input>
+                            <n-input for="FullName" icon="@Icons.Name"></n-input>
+                            <n-input for="PhoneNumber" min="10" max="10" icon="@Icons.NumberPhone" class="@Razor.Class.NumberPhone"></n-input>
+                            <n-input for="Birthday" is-date="true"></n-input>
+                            <n-file for="Avatar" is-auto="false"></n-file>
+                            <n-switch for="IsMale" label-left="Nữ"></n-switch>
+                            <n-input for="Password" type="password" icon="@Icons.Password"></n-input>
+                            <n-input for="ConfirmPassword" type="password" icon="@Icons.Password"></n-input>
+                            @*<n-input for="Code" icon="@Icons.Password"></n-input>*@
+
+                            <div class="mb-3 mt-3 text-right">
+                                <a href="/account/login?returnUrl=@ViewData["ReturnUrl"]">
+                                    Đăng nhập
+                                </a>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-block text-uppercase mb-2 rounded-pill shadow-sm">Đăng ký</button>
+                            @if(ViewData["ErrorMessage"] != null) {
+                                <div class="text-danger mt-2">
+                                    @ViewData["ErrorMessage"]
+                                </div>
+                            }
+                        </n-form>
+                    </div>
+                </div>
+            </div><!-- End -->
+        </div>
+    </div><!-- End -->
+</div>
+@section Styles{
+    <style>
+        .login,
+        .image {
+            min-height: 100vh;
+        }
+
+        .bg-image {
+            background-image: url('@Helper.ImageRegister');
+            background-size: cover;
+            background-position: center center;
+        }
+    </style>
+}
+@section Scripts {
+    <script>
+        $("#fileAvatar").upImage(240, 240, true);
+        function eValidate() {
+            if ($("#Password").val() != $("#ConfirmPassword").val()) {
+                toastr.warning('Nhập lại mật khẩu không đúng');
+                return false;
+            }
+            return true;
+        }
+        $.validate(eValidate);
+    </script>
+}

@@ -1,0 +1,24 @@
+﻿@model PageResult<CM_Active>
+@{
+    ViewData["Title"] = "Page";
+    ViewBag.MenuPart = LayoutMenu.Active;
+    ViewBag.MenuItem = 1;
+    var menuLayout = LayoutMenu.Get(ViewBag.MenuPart);
+}
+<n-navs icon="@menuLayout.Icon" label-1="@menuLayout.Name" path-1="@menuLayout.Path" active="Nhật ký hoạt động"></n-navs>
+
+@foreach(var item in Model) {
+    <div>
+        <div>@item.DateCreated.ToString("HH:mm dd/MM/yyyy") Title: @item.Title</div>
+        <div>@Html.Raw(item.Description)</div>
+        <div>@item.SourceId</div>
+    </div>
+    <hr />
+}
+<n-pages page="Model.CurrentPage" size="Model.PageSize" total="Model.RowCount" path="/active/page?page="></n-pages>
+
+@section Scripts{
+    <script>
+        Init.loadDataTables(false);
+    </script>
+}

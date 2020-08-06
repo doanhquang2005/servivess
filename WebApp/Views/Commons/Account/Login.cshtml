@@ -1,0 +1,70 @@
+﻿@model LoginViewModel
+@{
+    ViewData["Title"] = "Login";
+    Layout = "_LayoutLogin";
+}
+
+<div class="row no-gutter">
+    <!-- The image half -->
+    <div class="col-md-6 d-none d-md-flex bg-image"></div>
+
+    <!-- The content half -->
+    <div class="col-md-6 bg-light">
+        <div class="login d-flex align-items-center py-5">
+
+            <!-- Demo content-->
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-10 col-xl-7 mx-auto">
+                        <h3 class="display-4">@Helper.BrandName</h3>
+                        <p class="text-muted mb-4 text-right">@Helper.Slogan</p>
+                        <form id="f-login" method="post" action="/account/login?returnUrl=@ViewData["ReturnUrl"]">
+                            @Html.AntiForgeryToken()
+                            <div class="form-group mb-3">
+                                <input id="UserName" name="UserName" type="text" placeholder="Tài khoản" value="@Model.UserName" class="form-control rounded-pill border-0 shadow-sm px-4">
+                            </div>
+                            <div class="form-group mb-3">
+                                <input id="Password" name="Password" type="password" placeholder="Mật khẩu" class="form-control rounded-pill border-0 shadow-sm px-4 text-primary">
+                            </div>
+                            <div class="custom-control custom-checkbox mb-3">
+                                <input id="RememberMe" name="RememberMe" type="checkbox" @(Model.RememberMe ? "checked" : "") class="custom-control-input">
+                                <label for="RememberMe" class="custom-control-label">Ghi nhớ?</label>
+                                <a href="/account/register?returnUrl=@ViewData["ReturnUrl"]" class="float-right">
+                                    Đăng ký
+                                </a>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-block text-uppercase mb-2 rounded-pill shadow-sm">Đăng nhập</button>
+                            @if(ViewData["ErrorMessage"] != null) {
+                                <div class="text-danger mt-2">
+                                    @ViewData["ErrorMessage"]
+                                </div>
+                            }
+                        </form>
+                    </div>
+                </div>
+            </div><!-- End -->
+        </div>
+    </div><!-- End -->
+</div>
+@section Styles{
+    <style>
+    .login,
+    .image {
+        min-height: 100vh;
+    }
+
+    .bg-image {
+        background-image: url('@Helper.ImageLogin');
+        background-size: cover;
+        background-position: center center;
+    }
+    </style>
+}
+@section Scripts {
+    <script>
+        $("#f-login").submit(function (e) {
+            if ($("#UserName").val() == "" || $("#Password").val() == "")
+                e.preventDefault();
+        })
+    </script>
+}

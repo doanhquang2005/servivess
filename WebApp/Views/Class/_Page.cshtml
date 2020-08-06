@@ -1,0 +1,62 @@
+﻿@model PageResult<ED_Class>
+@{
+    Layout = null;
+}
+<n-table>
+    <thead>
+        <tr>
+            <th class="th-sm">No</th>
+            <th>Tên lớp</th>
+            <td>Năm học</td>
+            <th>Nhóm lớp</th>
+            <th>Nhóm tuổi</th>
+            <th>Học 2 buổi</th>
+            <th>Bán trú</th>
+            <th>Điểm trường</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var item in Model) {
+            <tr class="@Razor.Class.RowDelete">
+                <td>@item.Position</td>
+                <td>
+                    <n-dropdown-label></n-dropdown-label>
+                    <n-dropdown>
+                        <n-dropdown-item path="/class/edit/@item.Id">
+                            <n-icon active="(int)Actives.Edit"></n-icon>
+                        </n-dropdown-item>
+                        <n-dropdown-item path="/class/delete/@item.Id" method="post">
+                            <n-icon active="(int)Actives.Delete"></n-icon>
+                        </n-dropdown-item>
+                        @if(!item.IsEnd) {
+                            <n-dropdown-item method="showModal('@item.Id');" id="close-@item.Id">
+                                <i class="@Icons.Close fa-fw"></i> Đóng lớp
+                            </n-dropdown-item>
+                        } else if(item.Status != Status.Lock) {
+                            <n-dropdown-item path="/class/create/@item.Id">
+                                <i class="@Icons.Up fa-fw"></i> Nâng lớp
+                            </n-dropdown-item>
+                            <n-dropdown-item path="/class/success/@item.Id" method="post" active="(int)Actives.Confirm">
+                                <i class="@Icons.Up fa-fw"></i> Hoàn thành
+                            </n-dropdown-item>
+                        }
+                    </n-dropdown>
+                    <a href="/class/detail/@item.Id" class="text-info">@item.ClassName</a>
+                </td>
+                <td><n-id for="@item.YearId"></n-id></td>
+                <td><n-id for="@item.GroupClassId"></n-id></td>
+                <td><n-id for="@item.GroupOldId"></n-id></td>
+                <td><n-view for="@item.IsFullTime"></n-view></td>
+                <td><n-id for="@item.HaftLiveId"></n-id></td>
+                <td><n-id for="@item.SchoolId"></n-id></td>
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            @for(int i = 1; i <= 8; i++) {
+                <th></th>
+            }
+        </tr>
+    </tfoot>
+</n-table>

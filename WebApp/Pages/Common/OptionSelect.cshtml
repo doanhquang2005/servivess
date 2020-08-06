@@ -1,0 +1,19 @@
+﻿@model CommonOptionSelect
+@{
+    if(Model.Type == Types.PermissionLevel) {
+        foreach(EN_PermissionLevel item in (EN_PermissionLevel[])Enum.GetValues(typeof(EN_PermissionLevel))) {
+            Model.Details.Add(new CommonOptionSelectDetail { Id = (int)item + "", Name = EnumName.PermissionLevel(item) });
+        }
+    } else if(Model.Type == Types.ReceiptType) {
+        Model.Details.Add(new CommonOptionSelectDetail { Id = "-1", Name = "Phiếu chi" });
+        Model.Details.Add(new CommonOptionSelectDetail { Id = "1", Name = "Phiếu thu" });
+    }
+}
+@if(!Model.IsRequire && !Model.IsMultiple && Model.IsDefault) {
+<n-option value="" is-lock="false">-- Không lựa chọn --</n-option>
+} else if(Model.IsRequire && Model.Details.Where(d => Model.Value?.ToUpper().Contains(d.Id?.ToUpper()) ?? false).FirstOrDefault() == null && !Model.IsDefault) {
+<n-option value="" is-lock="false">-- Lựa chọn --</n-option>
+}
+@foreach(var item in Model.Details) {
+<n-option selects="@Model.Value" icon="@item.Icon" value="@item.Id" is-lock="false">@item.Name</n-option>
+}

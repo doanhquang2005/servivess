@@ -1,0 +1,8 @@
+﻿@model BiDays
+@{
+    bool isEdit = ViewData["IsEdit"]?.ToString() == "1";
+}
+
+<n-hide for="Id"></n-hide>
+<n-input for="DayName" label="Mô tả ngày"></n-input>
+<n-input for="DateTime" is-date="true" label="Ngày tháng năm"></n-input>

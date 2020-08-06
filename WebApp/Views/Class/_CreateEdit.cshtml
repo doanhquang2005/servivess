@@ -1,0 +1,39 @@
+﻿@model ED_Class
+@{
+    bool isLock = Model.DateCreated.AddDays(7) < DateTime.Now;
+    bool isEdit = ViewData["IsEdit"]?.ToString() == "1";
+}
+@if(Model.SourceId != null) {
+    <n-title>Nâng lớp <n-id for="SourceId" type="Types.ED_Class"></n-id></n-title>
+}
+<div class="row">
+    <div class="col-sm-6">
+        <n-hide for="Id"></n-hide>
+        <n-hide for="SourceId"></n-hide>
+        <n-hide for="DateCreated"></n-hide>
+        <n-select for="YearId" type="@Types.ED_Year" is-read-only="isLock"></n-select>
+        <n-select for="GroupClassId" type="@Types.ED_GroupClass" child-id1="GroupOldId" is-read-only="isLock"></n-select>
+        <n-select for="GroupOldId" type="@Types.ED_GroupOld" parent-id1="@Model.GroupClassId" is-read-only="isLock"></n-select>
+        <n-select for="SchoolId" type="@Types.ED_School" is-read-only="isLock"></n-select>
+        <n-input for="ClassName"></n-input>
+        <n-input for="DateStart" value="@Model.DateStart" class="@Razor.Class.DatePicker" is-read-only="Model.IsEnd"></n-input>
+        <n-input for="DateEnd" value="@Model.DateEnd" class="@Razor.Class.DatePicker"
+                 is-require="false" is-read-only="Model.IsEnd"></n-input>
+        @if(isEdit) {
+            <n-input for="Position" icon="@Icons.Position" class="@Razor.Class.Number"></n-input>
+        }
+    </div>
+    <div class="col-sm-6">
+        @*<div class="md-form">Ghép lớp</div>*@
+        <n-select for="HaftLiveId" type="@Types.CM_HalfLive" is-require="false"></n-select>
+        <n-select for="ProgramId" type="@Types.ED_Program" is-require="false"></n-select>
+        <n-checkbox for="IsLanguage"></n-checkbox>
+        <n-checkbox for="IsFullTime"></n-checkbox>
+        <n-checkbox for="IsDisability"></n-checkbox>
+        @*<n-radio-label id="radio" label="fsdfsdfsdf:">
+                <n-radio-item name="radio" value="1" label="Check box 1"></n-radio-item>
+                <n-radio-item name="radio" value="2" label="Check box 3"></n-radio-item>
+                <n-radio-item name="radio" value="3" label="Check box 2"></n-radio-item>
+            </n-radio-label>*@
+    </div>
+</div>

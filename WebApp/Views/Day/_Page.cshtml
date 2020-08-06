@@ -1,0 +1,37 @@
+﻿@model PageResult<BiDays>
+@{
+    Layout = null;
+    int No = 1;
+}
+<div id="@Razor.Id.Content">
+    <n-table id="">
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>Thông tin ngày</th>
+                <th>Ngày</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var item in Model) {
+                <tr class="@Razor.Class.RowDelete">
+                    <td>@(No++)</td>
+                    <td>
+                        <n-dropdown-label></n-dropdown-label>
+                        <n-dropdown>
+                            <n-dropdown-item path="/class/edit/@item.Id">
+                                <n-icon active="(int)Actives.Edit"></n-icon>
+                            </n-dropdown-item>
+                            <n-dropdown-item path="/class/delete/@item.Id" method="post">
+                                <n-icon active="(int)Actives.Delete"></n-icon>
+                            </n-dropdown-item>
+                        </n-dropdown>
+                        <a class="text-info">@item.DayName</a>
+                    </td>
+                    <td>@item.DateTime.ToString("dd/MM/yyyy")</td>
+                </tr>
+            }
+        </tbody>
+    </n-table>
+    <n-pages page="Model.CurrentPage" size="Model.PageSize" total="Model.RowCount"></n-pages>
+</div>

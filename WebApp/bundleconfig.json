@@ -1,0 +1,40 @@
+[
+  {
+    "outputFileName": "wwwroot/main.min.css",
+    "inputFiles": [
+      "wwwroot/fontawesome/css/all.css",
+      "wwwroot/css/bootstrap.css",
+      "wwwroot/css/mdb.css",
+      "wwwroot/css/addons/datatables.css",
+      "wwwroot/css/style.css",
+      "wwwroot/rate/css/star-rating.css",
+      "wwwroot/style.css",
+      "wwwroot/chicano.css"
+
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/main.min.js",
+    "inputFiles": [
+      "wwwroot/js/modules/wow.js",
+      "wwwroot/js/addons/datatables.js",
+      "wwwroot/rate/js/star-rating.js",
+      "wwwroot/js/cookie.js",
+      "wwwroot/js/form.js",
+      "wwwroot/js/extent.js",
+      "wwwroot/script.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/mdb.lite.min.js",
+    "inputFiles": [
+      "wwwroot/js/mdb.lite.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/cookie.min.js",
+    "inputFiles": [
+      "wwwroot/js/cookie.js"
+    ]
+  }
+]
